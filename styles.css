@@ -1,0 +1,150 @@
+.total-wrapper {
+	position: relative;
+	background-color: green;
+	width:100%;
+	height: 530px;
+	margin: 0 auto;
+	border-radius: 10px;
+}
+
+#win-loss{
+	background: red;
+	width: 100px;
+	height: 30px;
+	color: white;
+	border-radius: 5px;
+	margin-left: 48%;
+	text-align: center;
+	padding-top: 14px;
+}
+
+#win-count{
+	color:white;
+}
+
+#dealer-hand {
+	margin-top: 20px;
+	color: white;
+}
+
+
+#dealer-total-wrapper{
+	position: absolute;
+	width: 8%;
+	text-align: center;
+	color: white;
+	font-size: 20px;
+	top: 24.5%;
+	left: 1%;
+}
+
+
+#player-total-wrapper{
+	position: absolute;
+	width: 8%;
+	text-align:center;
+	color:white;
+	font-size: 20px;
+	top: 	64%;
+	left: 1%;
+}
+
+.card{
+	background: #ccc;
+	width: 100px;
+	height: 150px;
+	position: absolute;
+	border: 5px dashed;
+}
+
+.total-wrapper{
+	position: relative;
+}
+
+#dealer-card-one {
+	top: 15%;
+	left: 10%;
+}
+
+#dealer-card-two {
+	top: 15%;
+	left: 25%;
+}
+
+#dealer-card-three {
+	top: 15%;
+	left: 40%;
+}
+
+#dealer-card-four {
+	top: 15%;
+	left: 55%;
+}
+
+#dealer-card-five {
+	top: 15%;
+	left: 70%;
+}
+#dealer-card-six {
+	top: 15%;
+	left: 85%;
+}
+
+#player-card-one {
+	top: 55%;
+	left: 10%;
+}
+
+#player-card-two {
+	top: 55%;
+	left: 25%;
+}
+
+#player-card-three {
+	top: 55%;
+	left: 40%;
+}
+
+#player-card-four {
+	top: 55%;
+	left: 55%;
+}
+
+#player-card-five {
+	top: 55%;
+	left: 70%;
+}
+
+#player-card-six {
+	top: 55%;
+	left: 85%;
+}
+
+
+
+#play-buttons button{
+	position: absolute;
+	border-radius: 5px;
+	top: 90.5%;
+}
+
+
+#draw-button{
+	width: 9%;
+	height: 25px;
+	left: 18%;
+}
+
+#hit-button{
+	width: 9%;
+	height: 25px;
+	left: 48%;
+}
+
+#stand-button{
+	width: 9%;
+	height: 25px;
+	left: 78%;
+}
+
+

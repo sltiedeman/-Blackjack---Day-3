@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript" src="scripts.js"></script>
+</head>
+<body>
+<div class="total-wrapper">
+	<div id="win-loss">Wins: <span id="win-count">0</span></div>
+
+	<div id="dealer-hand">
+		<div id="dealer-total-wrapper">Dealer Total<div id="dealer-total">0</div></div>
+		<div id="dealer-card-one" class="card empty"></div>
+		<div id="dealer-card-two" class="card empty"></div>
+		<div id="dealer-card-three" class="card empty"></div>
+		<div id="dealer-card-four" class="card empty"></div>
+		<div id="dealer-card-five" class="card empty"></div>
+		<div id="dealer-card-six" class="card empty"></div>
+	</div>
+
+	<div id="player-hand">
+		<div id="player-total-wrapper">Player Total<div id="player-total">0</div></div>
+		<div id="player-card-one" class="card empty"></div>
+		<div id="player-card-two" class="card empty"></div>
+		<div id="player-card-three" class="card empty"></div>
+		<div id="player-card-four" class="card empty"></div>
+		<div id="player-card-five" class="card empty"></div>
+		<div id="player-card-six" class="card empty"></div>
+	</div>
+
+	<div id="play-buttons">
+		<div cards></div>
+		<button id="draw-button" onclick="deal()">Deal</button>
+		<button id="hit-button" onclick="hit()">Hit</button>
+		<button id="stand-button" onclick="stand()">Stand</button>
+
+	</div>
+</div>
+</body>
+</html>
