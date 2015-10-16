@@ -2,20 +2,23 @@
 	position: relative;
 	background-color: green;
 	width:100%;
-	height: 530px;
+	height: 560px;
 	margin: 0 auto;
 	border-radius: 10px;
 }
 
 #win-loss{
+	position: absolute;
 	background: red;
-	width: 100px;
-	height: 30px;
+	width: 11%;
+	height: 6%;
 	color: white;
 	border-radius: 5px;
-	margin-left: 48%;
+	top: 4%;
+	left: 47.5%;
 	text-align: center;
-	padding-top: 14px;
+	padding-top: 1.2%;
+	font-size: 1.35em;
 }
 
 #win-count{
@@ -49,7 +52,16 @@
 	left: 1%;
 }
 
+
 .card{
+	position: absolute;
+	background: white;
+	width: 100px;
+	height: 150px;
+	border: 5px dashed;
+} 
+
+.card.empty{
 	background: #ccc;
 	width: 100px;
 	height: 150px;
@@ -57,67 +69,115 @@
 	border: 5px dashed;
 }
 
-.total-wrapper{
+/*.total-wrapper{
 	position: relative;
-}
+}*/
 
 #dealer-card-one {
 	top: 15%;
 	left: 10%;
+	text-align: center;
+	color: black;
+	font-size: 3em;
+	line-height: 70%;
 }
 
 #dealer-card-two {
 	top: 15%;
 	left: 25%;
+	text-align: center;
+	color: black;
+	font-size: 3em;
+	line-height: 70%;
 }
 
 #dealer-card-three {
 	top: 15%;
 	left: 40%;
+	text-align: center;
+	color: black;
+	font-size: 3em;
+	line-height: 70%;
 }
 
 #dealer-card-four {
 	top: 15%;
 	left: 55%;
+	text-align: center;
+	color: black;
+	font-size: 3em;
+	line-height: 70%;
 }
 
 #dealer-card-five {
 	top: 15%;
 	left: 70%;
+	text-align: center;
+	color: black;
+	font-size: 3em;
+	line-height: 70%;
 }
 #dealer-card-six {
 	top: 15%;
 	left: 85%;
+	text-align: center;
+	color: black;
+	font-size: 3em;
+	line-height: 70%;
 }
 
 #player-card-one {
 	top: 55%;
 	left: 10%;
+	text-align: center;
+	color: black;
+	font-size: 3em;
+	line-height: 70%;
 }
 
 #player-card-two {
 	top: 55%;
 	left: 25%;
+	text-align: center;
+	color: black;
+	font-size: 3em;
+	line-height: 70%;
 }
 
 #player-card-three {
 	top: 55%;
 	left: 40%;
+	text-align: center;
+	color: black;
+	font-size: 3em;
+	line-height: 70%;
 }
 
 #player-card-four {
 	top: 55%;
 	left: 55%;
+	text-align: center;
+	color: black;
+	font-size: 3em;
+	line-height: 70%;
 }
 
 #player-card-five {
 	top: 55%;
 	left: 70%;
+	text-align: center;
+	color: black;
+	font-size: 3em;
+	line-height: 70%;
 }
 
 #player-card-six {
 	top: 55%;
 	left: 85%;
+	text-align: center;
+	color: black;
+	font-size: 3em;
+	line-height: 70%;
 }
 
 
@@ -125,26 +185,38 @@
 #play-buttons button{
 	position: absolute;
 	border-radius: 5px;
-	top: 90.5%;
+	top: 89%;
+	font-size: 1em;
+	color: white;
+	background-color: black;
 }
 
 
 #draw-button{
-	width: 9%;
-	height: 25px;
+	width: 12%;
+	height: 6%;
 	left: 18%;
 }
 
 #hit-button{
-	width: 9%;
-	height: 25px;
-	left: 48%;
+	width: 12%;
+	height: 6%;
+	left: 47%;
 }
 
 #stand-button{
-	width: 9%;
-	height: 25px;
-	left: 78%;
+	width: 12%;
+	height: 6%;
+	left: 76%;
 }
 
+#message{
+	width: 100%;
+	position: absolute;
+	top: 40%;
+	color: red;
+	font-size: 3.5em;
+	background: white;
+	text-align: center;
+}
 
