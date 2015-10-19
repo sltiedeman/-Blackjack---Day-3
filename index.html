@@ -4,13 +4,19 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title></title>
-	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="styles2.css">
 	<script type="text/javascript" src="scripts.js"></script>
 </head>
 <body>
 <div class="total-wrapper">
-	<div id="win-loss">Wins: <span id="win-count">0</span></div>
-
+	<div id="message"></div>
+	<div id="win-loss">
+		<span id = "wins">Wins:</span> 
+		<span id="win-count">0</span>Ties:
+		<span id = "total-ties"> 0</span>Losses:
+		<span id = "total-lost"> 0</span>% Won:
+		<span id = "winning-percentage"> 0
+		</div>
 	<div id="dealer-hand">
 		<div id="dealer-total-wrapper">Dealer Total<div id="dealer-total">0</div></div>
 		<div id="dealer-card-one" class="card empty"></div>
@@ -33,11 +39,27 @@
 
 	<div id="play-buttons">
 		<div cards></div>
-		<button id="draw-button" onclick="deal()">Deal</button>
-		<button id="hit-button" onclick="hit()">Hit</button>
-		<button id="stand-button" onclick="stand()">Stand</button>
+		<button id="draw-button" onclick="deal()" disabled="true">Deal</button>
+		<button id="hit-button" onclick="hit()" disabled="true">Hit</button>
+		<button id="stand-button" onclick="stand()" disabled="true">Stand</button>
 
 	</div>
+
+	<div id="wager-buttons">
+		<div cards></div>
+		<button id="wager1-button" onclick="wager1(1)">$1</button>
+		<button id="wager2-button" onclick="wager1(2)">$2</button>
+		<button id="wager5-button" onclick="wager1(5)">$5</button>
+	</div>
+
+	<div id="wagers">
+		<div id="total-money" >Money: $<span id="money">50</span></div>
+		<div id="current-bet" >Current Wager: <span id="current-bet-amount">$0</span></div>
+		<div id="wins-losses" >Total Won/Lost: <span id="wins-and-losses">$0</span><div>
+	</div>
+
+
+
 
 	<div id="message"></div>
 </div>

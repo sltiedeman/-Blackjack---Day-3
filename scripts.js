@@ -5,6 +5,16 @@ var dealerTotalCards = 2;
 var playerHand;
 var dealerHand;
 var totalWins = 0;
+var totalGames = 0;
+var winningPercentage = 0; 
+var numberOfTies = 0;
+
+//variables for wagering
+var totalMoney = 50;
+var initialMoney = totalMoney;
+var currentWager = 0;
+var gainsAndLosses = 0;
+var totalLostWon = 0;
 
 function shuffleDeck(){
 	//fill our deck, in order(for now)
@@ -82,11 +92,18 @@ function placeCard(card, who, slot){   //for visual effect of placing cards on t
 function bust(who){
 	if(who === "player"){
 		//player lost!!  dealer won
-		document.getElementById('message').innerHTML = "You have busted. Better luck next time.";
+		document.getElementById('message').innerHTML = "You have busted. Bet again.";
+		disablePlayButtons();
+		enableButtons();
 	}else{
-		document.getElementById('message').innerHTML = "The dealer busted.  You win!.";
+		document.getElementById('message').innerHTML = "The dealer busted. You win!. Bet again";
 		totalWins++;
 		document.getElementById('win-count').innerHTML = totalWins;
+		totalMoney = totalMoney + (currentWager*2);
+		currentWager = 0;
+		document.getElementById('money').innerHTML = totalMoney;
+		enableButtons();
+		disablePlayButtons();
 	}
 }
 
@@ -103,7 +120,6 @@ function calculateTotal(hand, who){
 	var total = 0;
 	var AceCount = 0;
 	for(i=0; i<hand.length; i++){
-		console.log(hand[i]);
 		var cardValue = hand[i].slice(0,-1); //will copy everything but one from the end
 		if(cardValue < 2){
 			total = total + Number(cardValue);
@@ -118,7 +134,9 @@ function calculateTotal(hand, who){
 		total = Ace(total);
 	}
 	var idWhoToGet = who + '-total';
-	document.getElementById(idWhoToGet).innerHTML = total;
+	// document.getElementById(idWhoToGet).innerHTML = total;
+	document.getElementById('player-total').innerHTML = total;
+
 	if(total>21){
 		bust(who);
 	}
@@ -128,6 +146,16 @@ function calculateTotal(hand, who){
 function deal(){
 	//Shuffled deck from function shuffleDeck
 	reset();
+	document.getElementById('wager1-button').disabled=true;
+	document.getElementById('wager2-button').disabled=true;
+	document.getElementById('wager5-button').disabled=true;
+	document.getElementById('draw-button').disabled=true;
+	document.getElementById("draw-button").style.backgroundColor="#b8cfb8";
+	document.getElementById("hit-button").style.backgroundColor="black";
+	document.getElementById("stand-button").style.backgroundColor="black";
+
+
+
 	deck = shuffleDeck();
 	playerHand = [ deck[0], deck[2] ];
 	dealerHand = [ deck[1], deck[3] ];
@@ -135,12 +163,49 @@ function deal(){
 	placeCard(playerHand[0], 'player', 'one');
 	placeCard(dealerHand[0], 'dealer', 'one');
 	placeCard(playerHand[1], 'player', 'two');
-	placeCard(dealerHand[1], 'dealer', 'two');
+	// placeCard(dealerHand[1], 'dealer', 'two');
 
 	calculateTotal(playerHand, 'player');
-	calculateTotal(dealerHand, 'dealer');
+	document.getElementById('dealer-total').innerHTML = "";
+	var dealerTotal = calculateTotal(dealerHand, 'dealer');
+	var playerTotal = calculateTotal(playerHand, 'player');
+	if ((dealerTotal === 21) && (playerTotal != 21)){
+		placeCard(dealerHand[1], 'dealer', 'two');
+		// document.getElementById('message').innerHTML = "Dealer got BlackJack.  You lose.";
+		disablePlayButtons();
+		document.getElementById('message').innerHTML = "Dealer got BlackJack. You lose. Bet again";
+		document.getElementById("draw-button").style.backgroundColor="black";
+		showDealerTotal(dealerHand,'dealer');
+		currentWager = 0;
+		enableButtons();
 
+	}
+	if((dealerTotal === 21) && (playerTotal === 21)){
+		placecard(dealerHand[1], 'dealer', 'two');
+		disablePlayButtons();
+		document.getElementById('message').innerHTML = "You both tied with 21! Bet again";
+		totalMoney = totalMoney + currentWager;
+		currentWager = 0;
+		document.getElementById('money').innerHTML = totalMoney;
+		enableButtons();
+	}
+	if (playerTotal === 21){
+		document.getElementById('message').innerHTML = "You have 21.  Time to Stand";			// document.getElementById('message').innerHTML = "You have 21. Time to Stand.";
+	}
+	document.getElementById("wins-and-losses").innerHTML ="$" + totalLostWon;
+
+
+	
 }
+
+// function myFunction(){
+// 	document.getElementById('message').innerHTML = "You have 21.  Time to Stand";
+// }
+
+
+// function backToDefault(){
+// 	document.getElementById('hit-button').removeEventListener("onmouseover", myFunction, false);
+// }
 
 function hit(){
 	var slot;
@@ -158,10 +223,42 @@ function hit(){
 	playerTotalCards++;
 	placeInDeck++
 	calculateTotal(playerHand, 'player');
+	var score = calculateTotal(playerHand, 'player');
+	if (score > 21){
+		document.getElementById("hit-button").disabled=true;
+	}else if (score === 21){
+		document.getElementById('message').innerHTML = "You have 21.  Time to Stand";
+	}
+}
+
+function showDealerTotal(hand, who){
+	var newTotal = 0;
+	var AceCount = 0;
+	for(i=0; i<hand.length; i++){
+		var cardValue = hand[i].slice(0,-1); //will copy everything but one from the end
+		if(cardValue < 2){
+			newTotal = newTotal + Number(cardValue);
+			AceCount++;
+		}else if(cardValue < 11){
+			newTotal = newTotal + Number(cardValue);
+		}else{
+			newTotal = newTotal + 10;
+		}
+	}
+	if(AceCount > 0){
+		newTotal = Ace(newTotal);
+	}
+	var idWhoToGet = who + '-total';
+	// document.getElementById(idWhoToGet).innerHTML = total;
+	document.getElementById(idWhoToGet).innerHTML = newTotal;
+	return(newTotal);
 
 }
 
 function stand(){
+	document.getElementById("draw-button").style.backgroundColor="black";
+	showDealerTotal(dealerHand, 'dealer');
+	placeCard(dealerHand[1], 'dealer', 'two');
 	var dealerHas = Number(document.getElementById('dealer-total').innerHTML);
 	var slot;
 	while(dealerHas < 17){
@@ -177,32 +274,148 @@ function stand(){
 		}
 		placeCard(deck[placeInDeck], 'dealer', slot);
 		dealerHand.push(deck[placeInDeck]);
-		dealerHas = calculateTotal(dealerHand, 'dealer');
+		dealerHas = showDealerTotal(dealerHand, 'dealer');
+		console.log("dealerhas equals " + dealerHas);
 		placeInDeck++;
 		dealerTotalCards++;
 	}
 //We know the dealer now has more than 17 or we would still be in the loop
 	checkWin (Number(document.getElementById('dealer-total').innerHTML), Number(document.getElementById('player-total').innerHTML));
+	document.getElementById("wins-and-losses").innerHTML ="$" + totalLostWon;
 
 }
 
 function checkWin(dealerScore, playerScore){
 	if(dealerScore > 21){
-		document.getElementById('message').innerHTML = "The dealer busted.  You win!";
+		document.getElementById('message').innerHTML = "The dealer busted.  You win! Bet again.";
 		totalWins++;
 		document.getElementById('win-count').innerHTML = totalWins;
-	}else if(dealerScore >= playerScore){
-		document.getElementById('message').innerHTML = "The dealer won. You Lost.";
+		totalMoney = totalMoney + (currentWager*2);
+		document.getElementById('win-count').innerHTML = totalWins;
+		checkWinReset();
+		disablePlayButtons();
+	}else if(dealerScore > playerScore){
+		document.getElementById('message').innerHTML = "The dealer won. You Lost. Bet again.";
+		checkWinReset();
+		disablePlayButtons();
+	}else if(dealerScore === playerScore){	
+		document.getElementById('money').innerHTML = totalMoney;
+		document.getElementById('draw-button').disabled="true";
+		enableButtons();
+		disableButtons();
+		disablePlayButtons();
+		document.getElementById("draw-button").style.backgroundColor="black";
+		document.getElementById('message').innerHTML = "The game is a draw. Bet again.";
+		totalMoney = totalMoney + currentWager;
+		document.getElementById('money').innerHTML = totalMoney;
+		currentWager = 0;	
 	}else{
-		document.getElementById('message').innerHTML = "Congratulations! You beat the dealer!"
+		document.getElementById('message').innerHTML = "Congratulations! You beat the dealer! Bet again."
 		totalWins++;
 		document.getElementById('win-count').innerHTML = totalWins;
-
+		totalMoney = totalMoney + (currentWager*2);
+		checkWinReset();
+		disablePlayButtons();
 	}
+	document.getElementById("wins-and-losses").innerHTML ="$" + totalLostWon;
+}
+
+function checkWinReset(){
+		currentWager = 0;
+		document.getElementById('money').innerHTML = totalMoney;
+		document.getElementById('draw-button').disabled = true;
+		enableButtons();
+		disableButtons();
+		document.getElementById("draw-button").style.backgroundColor="black";
 
 }
 
+
+
+function wager1(wageramount){
+	currentWager = Number(wageramount);
+	document.getElementById("draw-button").disabled=false;
+	document.getElementById('current-bet-amount').innerHTML = "$ " + currentWager;
+	if(totalMoney < currentWager){
+		document.getElementById('message').innerHTML = "You are out of money! Start Over";
+		// reset();
+		disablePlayButtons();
+		enableButtons();
+		totalMoney=initialMoney;
+	}else{
+
+		var cards = document.getElementsByClassName('card');
+		for (i=0; i<cards.length; i++){
+			cards[i].innerHTML = "";
+			cards[i].className = 'card empty';
+			cards[i].style.backgroundColor = "#ccc";
+			cards[i].style.background = "";
+		}
+		document.getElementById('dealer-total').innerHTML="";
+		document.getElementById('player-total').innerHTML="";
+
+
+		totalMoney = totalMoney - currentWager;
+		document.getElementById('money').innerHTML = totalMoney;
+		document.getElementById("wager1-button").disabled=true;
+		document.getElementById("wager2-button").disabled=true;
+		document.getElementById("wager5-button").disabled=true;
+		document.getElementById("wager1-button").style.backgroundColor="#b8cfb8";
+		document.getElementById("wager2-button").style.backgroundColor="#b8cfb8";
+		document.getElementById("wager5-button").style.backgroundColor="#b8cfb8";
+		document.getElementById("draw-button").style.backgroundColor="black";
+		document.getElementById("hit-button").style.backgroundColor="b8cfb8";
+		document.getElementById("stand-button").style.backgroundColor="#b8cfb8";
+		document.getElementById("message").innerHTML = "";
+		totalLostWon = totalMoney - initialMoney;
+		document.getElementById("wins-and-losses").innerHTML ="$" + totalLostWon;
+	}
+}
+
+
+
+function disableButtons(){
+	document.getElementById("stand-button").disabled=true;
+	document.getElementById("hit-button").disabled=true;
+}
+
+function disablePlayButtons(){
+	document.getElementById("stand-button").disabled=true;
+	document.getElementById("hit-button").disabled=true;
+	document.getElementById("draw-button").disabled-true;
+	document.getElementById("stand-button").style.backgroundColor = "#b8cfb8";
+	document.getElementById("hit-button").style.backgroundColor = "#b8cfb8";
+	document.getElementById("draw-button").style.backgroundColor = "#b8cfb8";
+
+
+
+}
+function enableButtons(){
+	document.getElementById('wager1-button').disabled=false;
+	document.getElementById('wager2-button').disabled=false;
+	document.getElementById('wager5-button').disabled=false;
+	document.getElementById("wager1-button").style.backgroundColor="red";
+	document.getElementById("wager2-button").style.backgroundColor="red";
+	document.getElementById("wager5-button").style.backgroundColor="red";
+
+	document.getElementById('current-bet-amount').innerHTML = " $" + 0;
+}
+
+
 function reset(){
+	totalGames++;
+	if (totalWins>0){
+		winningPercentage = Math.round((totalWins / (totalGames-1))*100);
+		document.getElementById('winning-percentage').innerHTML = winningPercentage;
+
+	}else{
+		document.getElementById('winning-percentage').innerHTML = 0;
+	}
+	document.getElementById('total-ties').innerHTML = numberOfTies;	
+	document.getElementById('win-count').innerHTML = totalWins;	
+	var numberOfLosses = totalGames - numberOfTies - totalWins - 1;
+	document.getElementById('total-lost').innerHTML = numberOfLosses;
+
 	playerTotalCards = 2;
 	dealerTotalCards = 2;
 	playerHand = [];
@@ -216,7 +429,8 @@ function reset(){
 
 	}
 	document.getElementById('message').innerHTML = "";
-	// document.getElementById(currId).style.backgroundColor = "#ccc";
-	// document.getElementById(currId).style.backgroundSize = "";
+	document.getElementById("hit-button").disabled=false;
+	document.getElementById("stand-button").disabled=false;
+
 
 }

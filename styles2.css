@@ -2,7 +2,7 @@
 	position: relative;
 	background-color: green;
 	width:100%;
- 	height: 750px;
+ 	height: 800px;
 */	margin: 0 auto;
 	border-radius: 10px;
 }
@@ -17,8 +17,9 @@
 	top: 4.25%;
 	/*left: 9.75%;*/
 	text-align: center;
-	padding-top: 1.2%;
-	font-size: 1.35em;
+/*	padding-top: 1.2%;
+*/	font-size: 1.35em;
+	line-height: 2.2em;
 }
 
 #wins{
@@ -56,7 +57,7 @@
 	text-align: center;
 	color: white;
 	font-size: 20px;
-	top: 24.5%;
+	top: 22.5%;
 	left: 1.5%;
 }
 
@@ -67,7 +68,7 @@
 	text-align:center;
 	color:white;
 	font-size: 20px;
-	top: 55%;
+	top: 53%;
 	left: 1.5%;
 }
 
@@ -78,6 +79,7 @@
 	width: 100px;
 	height: 150px;
 	border: 5px dashed;
+	border-radius: 8px;
 } 
 
 .card.empty{
@@ -95,7 +97,7 @@
 }*/
 
 #dealer-card-one {
-	top: 17%;
+	top: 15%;
 	left: 11.5%;
 	text-align: center;
 	color: black;
@@ -104,7 +106,7 @@
 }
 
 #dealer-card-two {
-	top: 17%;
+	top: 15%;
 	left: 25.7%;
 	text-align: center;
 	color: black;
@@ -113,7 +115,7 @@
 }
 
 #dealer-card-three {
-	top: 17%;
+	top: 15%;
 	left: 39.9%;
 	text-align: center;
 	color: black;
@@ -122,7 +124,7 @@
 }
 
 #dealer-card-four {
-	top: 17%;
+	top: 15%;
 	left: 54.1%;
 	text-align: center;
 	color: black;
@@ -131,7 +133,7 @@
 }
 
 #dealer-card-five {
-	top: 17%;
+	top: 15%;
 	left: 68.3%;
 	text-align: center;
 	color: black;
@@ -139,7 +141,7 @@
 	line-height: 70%;
 }
 #dealer-card-six {
-	top: 17%;
+	top: 15%;
 	left: 82.7%;
 	text-align: center;
 	color: black;
@@ -147,8 +149,10 @@
 	line-height: 70%;
 }
 
+
+
 #player-card-one {
-	top: 48%;
+	top: 42%;
 	left: 11.5%;
 	text-align: center;
 	color: black;
@@ -157,7 +161,7 @@
 }
 
 #player-card-two {
-	top: 48%;
+	top: 42%;
 	left: 25.7%;
 	text-align: center;
 	color: black;
@@ -166,7 +170,7 @@
 }
 
 #player-card-three {
-	top: 48%;
+	top: 42%;
 	left: 39.9%;
 	text-align: center;
 	color: black;
@@ -175,7 +179,7 @@
 }
 
 #player-card-four {
-	top: 48%;
+	top: 42%;
 	left: 54.1%;
 	text-align: center;
 	color: black;
@@ -184,7 +188,7 @@
 }
 
 #player-card-five {
-	top: 48%;
+	top: 42%;
 	left: 68.3%;
 	text-align: center;
 	color: black;
@@ -193,7 +197,7 @@
 }
 
 #player-card-six {
-	top: 48%;
+	top: 42%;
 	left: 82.7%;
 	text-align: center;
 	color: black;
@@ -206,10 +210,10 @@
 #play-buttons button{
 	position: absolute;
 	border-radius: 5px;
-	top: 76%;
+	top: 66.5%;
 	font-size: 1em;
 	color: white;
-	background-color: black;
+	background-color: #b8cfb8;
 }
 
 
@@ -231,13 +235,79 @@
 	left: 72.5%;
 }
 
+#wager-buttons button{
+	position: absolute;
+	border-radius: 5px;
+	top: 77.5%;
+	font-size: 1em;
+	color: white;
+	background-color: red;
+}
+
+#wager1-button{
+	width: 12%;
+	height: 6%;
+	left: 15.5%;
+}
+
+#wager2-button{
+	width: 12%;
+	height: 6%;
+	left: 44%;
+}
+
+#wager5-button{
+	width: 12%;
+	height: 6%;
+	left: 72.5%;
+}
+
+#wagers{
+	position: absolute;
+	background: black;
+	width: 100%;
+	height: 6%;
+	color: white;
+	border-radius: 5px;
+	top: 88.5%;
+	/*left: 9.75%;*/
+	line-height: 2.2em;
+	font-size: 1.35em;
+	text-align: center;
+}
+
+
+
+
+
+
+#total-money{
+  	width: 33%;
+  	float: left;
+  	color: white;
+ }
+
+#money{
+	color: white;
+}
+
+#current-bet{
+	width:33%;
+	float: left;}
+
+#wins-losses{
+	width:33%;
+	float: left;
+}
+
+
 #message{
 	width: 100%;
 	position: absolute;
-	top: 40%;
+	top: 35%;
 	color: red;
-	font-size: 3.5em;
-	background: white;
+	font-size: 3em;
+	background: #ccc;
 	text-align: center;
 }
 
