@@ -72,19 +72,19 @@ function placeCard(card, who, slot){   //for visual effect of placing cards on t
 
 
 
-	document.getElementById(currId).className = "card"; //takes away empty class
-	document.getElementById(currId).innerHTML = "<br>" + newCardValue; 
+	$('#' + currId).addClass("card"); //takes away empty class
+	$('#' + currId).innerHTML = "<br>" + newCardValue; 
 	if(suitValue==='c'){
-		document.getElementById(currId).style.background = "url('small.png') 50% 70% no-repeat";
+		$('#' + currId).style.background = "url('small.png') 50% 70% no-repeat";
 	}else if(suitValue==='h'){
-		document.getElementById(currId).style.background = "url('heart.png') 50% 70% no-repeat";
+		$('#' + currId).style.background = "url('heart.png') 50% 70% no-repeat";
 	}else if(suitValue==='s'){
-		document.getElementById(currId).style.background = "url('spade.png') 50% 70% no-repeat";
+		$('#' + currId).style.background = "url('spade.png') 50% 70% no-repeat";
 	}else{
-		document.getElementById(currId).style.background = "url('diamond.png') 50% 70% no-repeat";
+		$('#' + currId).style.background = "url('diamond.png') 50% 70% no-repeat";
 	}
-	document.getElementById(currId).style.backgroundColor = "#fff";
-	document.getElementById(currId).style.backgroundSize = "30px 30px";
+	$('#' + currId).style.backgroundColor = "#fff";
+	$('#' + currId).style.backgroundSize = "30px 30px";
 
 
 }
@@ -92,16 +92,16 @@ function placeCard(card, who, slot){   //for visual effect of placing cards on t
 function bust(who){
 	if(who === "player"){
 		//player lost!!  dealer won
-		document.getElementById('message').innerHTML = "You have busted. Bet again.";
+		$('message').html("You have busted. Bet again.");
 		disablePlayButtons();
 		enableButtons();
 	}else{
-		document.getElementById('message').innerHTML = "The dealer busted. You win!. Bet again";
+		$('message').html("The dealer busted. You win!. Bet again");
 		totalWins++;
-		document.getElementById('win-count').innerHTML = totalWins;
+		$('win-count').html(totalWins);
 		totalMoney = totalMoney + (currentWager*2);
 		currentWager = 0;
-		document.getElementById('money').innerHTML = totalMoney;
+		$('money').html(totalMoney);
 		enableButtons();
 		disablePlayButtons();
 	}
@@ -134,8 +134,7 @@ function calculateTotal(hand, who){
 		total = Ace(total);
 	}
 	var idWhoToGet = who + '-total';
-	// document.getElementById(idWhoToGet).innerHTML = total;
-	document.getElementById('player-total').innerHTML = total;
+	$('player-total').html(total);
 
 	if(total>21){
 		bust(who);
@@ -146,13 +145,13 @@ function calculateTotal(hand, who){
 function deal(){
 	//Shuffled deck from function shuffleDeck
 	reset();
-	document.getElementById('wager1-button').disabled=true;
-	document.getElementById('wager2-button').disabled=true;
-	document.getElementById('wager5-button').disabled=true;
-	document.getElementById('draw-button').disabled=true;
-	document.getElementById("draw-button").style.backgroundColor="#b8cfb8";
-	document.getElementById("hit-button").style.backgroundColor="black";
-	document.getElementById("stand-button").style.backgroundColor="black";
+	$('wager1-button').disabled=true;
+	$('wager2-button').disabled=true;
+	$('wager5-button').disabled=true;
+	$('draw-button').disabled=true;
+	$("draw-button").style.backgroundColor="#b8cfb8";
+	$("hit-button").style.backgroundColor="black";
+	$("stand-button").style.backgroundColor="black";
 
 
 
@@ -166,15 +165,15 @@ function deal(){
 	// placeCard(dealerHand[1], 'dealer', 'two');
 
 	calculateTotal(playerHand, 'player');
-	document.getElementById('dealer-total').innerHTML = "";
+	$('dealer-total').innerHTML = "";
 	var dealerTotal = calculateTotal(dealerHand, 'dealer');
 	var playerTotal = calculateTotal(playerHand, 'player');
 	if ((dealerTotal === 21) && (playerTotal != 21)){
 		placeCard(dealerHand[1], 'dealer', 'two');
-		// document.getElementById('message').innerHTML = "Dealer got BlackJack.  You lose.";
+		// $('message').innerHTML = "Dealer got BlackJack.  You lose.";
 		disablePlayButtons();
-		document.getElementById('message').innerHTML = "Dealer got BlackJack. You lose. Bet again";
-		document.getElementById("draw-button").style.backgroundColor="black";
+		$('message').innerHTML = "Dealer got BlackJack. You lose. Bet again";
+		$("draw-button").style.backgroundColor="black";
 		showDealerTotal(dealerHand,'dealer');
 		currentWager = 0;
 		enableButtons();
@@ -183,28 +182,28 @@ function deal(){
 	if((dealerTotal === 21) && (playerTotal === 21)){
 		placecard(dealerHand[1], 'dealer', 'two');
 		disablePlayButtons();
-		document.getElementById('message').innerHTML = "You both tied with 21! Bet again";
+		$('message').innerHTML = "You both tied with 21! Bet again";
 		totalMoney = totalMoney + currentWager;
 		currentWager = 0;
-		document.getElementById('money').innerHTML = totalMoney;
+		$('money').innerHTML = totalMoney;
 		enableButtons();
 	}
 	if (playerTotal === 21){
-		document.getElementById('message').innerHTML = "You have 21.  Time to Stand";			// document.getElementById('message').innerHTML = "You have 21. Time to Stand.";
+		$('message').innerHTML = "You have 21.  Time to Stand";			// $('message').innerHTML = "You have 21. Time to Stand.";
 	}
-	document.getElementById("wins-and-losses").innerHTML ="$" + totalLostWon;
+	$("wins-and-losses").innerHTML ="$" + totalLostWon;
 
 
 	
 }
 
 // function myFunction(){
-// 	document.getElementById('message').innerHTML = "You have 21.  Time to Stand";
+// 	$('message').innerHTML = "You have 21.  Time to Stand";
 // }
 
 
 // function backToDefault(){
-// 	document.getElementById('hit-button').removeEventListener("onmouseover", myFunction, false);
+// 	$('hit-button').removeEventListener("onmouseover", myFunction, false);
 // }
 
 function hit(){
@@ -225,9 +224,9 @@ function hit(){
 	calculateTotal(playerHand, 'player');
 	var score = calculateTotal(playerHand, 'player');
 	if (score > 21){
-		document.getElementById("hit-button").disabled=true;
+		$("hit-button").disabled=true;
 	}else if (score === 21){
-		document.getElementById('message').innerHTML = "You have 21.  Time to Stand";
+		$('message').innerHTML = "You have 21.  Time to Stand";
 	}
 }
 
@@ -249,17 +248,17 @@ function showDealerTotal(hand, who){
 		newTotal = Ace(newTotal);
 	}
 	var idWhoToGet = who + '-total';
-	// document.getElementById(idWhoToGet).innerHTML = total;
-	document.getElementById(idWhoToGet).innerHTML = newTotal;
+	// $(idWhoToGet).innerHTML = total;
+	$('#' + idWhoToGet).innerHTML = newTotal;
 	return(newTotal);
 
 }
 
 function stand(){
-	document.getElementById("draw-button").style.backgroundColor="black";
+	$("draw-button").style.backgroundColor="black";
 	showDealerTotal(dealerHand, 'dealer');
 	placeCard(dealerHand[1], 'dealer', 'two');
-	var dealerHas = Number(document.getElementById('dealer-total').innerHTML);
+	var dealerHas = Number($('dealer-total').innerHTML);
 	var slot;
 	while(dealerHas < 17){
 			//keep hitting
@@ -280,53 +279,53 @@ function stand(){
 		dealerTotalCards++;
 	}
 //We know the dealer now has more than 17 or we would still be in the loop
-	checkWin (Number(document.getElementById('dealer-total').innerHTML), Number(document.getElementById('player-total').innerHTML));
-	document.getElementById("wins-and-losses").innerHTML ="$" + totalLostWon;
+	checkWin (Number($('dealer-total').innerHTML), Number($('player-total').innerHTML));
+	$("wins-and-losses").innerHTML ="$" + totalLostWon;
 
 }
 
 function checkWin(dealerScore, playerScore){
 	if(dealerScore > 21){
-		document.getElementById('message').innerHTML = "The dealer busted.  You win! Bet again.";
+		$('message').innerHTML = "The dealer busted.  You win! Bet again.";
 		totalWins++;
-		document.getElementById('win-count').innerHTML = totalWins;
+		$('win-count').innerHTML = totalWins;
 		totalMoney = totalMoney + (currentWager*2);
-		document.getElementById('win-count').innerHTML = totalWins;
+		$('win-count').innerHTML = totalWins;
 		checkWinReset();
 		disablePlayButtons();
 	}else if(dealerScore > playerScore){
-		document.getElementById('message').innerHTML = "The dealer won. You Lost. Bet again.";
+		$('message').innerHTML = "The dealer won. You Lost. Bet again.";
 		checkWinReset();
 		disablePlayButtons();
 	}else if(dealerScore === playerScore){	
-		document.getElementById('money').innerHTML = totalMoney;
-		document.getElementById('draw-button').disabled="true";
+		$('money').innerHTML = totalMoney;
+		$('draw-button').disabled="true";
 		enableButtons();
 		disableButtons();
 		disablePlayButtons();
-		document.getElementById("draw-button").style.backgroundColor="black";
-		document.getElementById('message').innerHTML = "The game is a draw. Bet again.";
+		$("draw-button").style.backgroundColor="black";
+		$('message').innerHTML = "The game is a draw. Bet again.";
 		totalMoney = totalMoney + currentWager;
-		document.getElementById('money').innerHTML = totalMoney;
+		$('money').innerHTML = totalMoney;
 		currentWager = 0;	
 	}else{
-		document.getElementById('message').innerHTML = "Congratulations! You beat the dealer! Bet again."
+		$('message').innerHTML = "Congratulations! You beat the dealer! Bet again."
 		totalWins++;
-		document.getElementById('win-count').innerHTML = totalWins;
+		$('win-count').innerHTML = totalWins;
 		totalMoney = totalMoney + (currentWager*2);
 		checkWinReset();
 		disablePlayButtons();
 	}
-	document.getElementById("wins-and-losses").innerHTML ="$" + totalLostWon;
+	$("wins-and-losses").innerHTML ="$" + totalLostWon;
 }
 
 function checkWinReset(){
 		currentWager = 0;
-		document.getElementById('money').innerHTML = totalMoney;
-		document.getElementById('draw-button').disabled = true;
+		$('money').innerHTML = totalMoney;
+		$('draw-button').disabled = true;
 		enableButtons();
 		disableButtons();
-		document.getElementById("draw-button").style.backgroundColor="black";
+		$("draw-button").style.backgroundColor="black";
 
 }
 
@@ -334,10 +333,10 @@ function checkWinReset(){
 
 function wager1(wageramount){
 	currentWager = Number(wageramount);
-	document.getElementById("draw-button").disabled=false;
-	document.getElementById('current-bet-amount').innerHTML = "$ " + currentWager;
+	$("draw-button").disabled=false;
+	$('current-bet-amount').innerHTML = "$ " + currentWager;
 	if(totalMoney < currentWager){
-		document.getElementById('message').innerHTML = "You are out of money! Start Over";
+		$('message').innerHTML = "You are out of money! Start Over";
 		// reset();
 		disablePlayButtons();
 		enableButtons();
@@ -351,54 +350,54 @@ function wager1(wageramount){
 			cards[i].style.backgroundColor = "#ccc";
 			cards[i].style.background = "";
 		}
-		document.getElementById('dealer-total').innerHTML="";
-		document.getElementById('player-total').innerHTML="";
+		$('dealer-total').innerHTML="";
+		$('player-total').innerHTML="";
 
 
 		totalMoney = totalMoney - currentWager;
-		document.getElementById('money').innerHTML = totalMoney;
-		document.getElementById("wager1-button").disabled=true;
-		document.getElementById("wager2-button").disabled=true;
-		document.getElementById("wager5-button").disabled=true;
-		document.getElementById("wager1-button").style.backgroundColor="#b8cfb8";
-		document.getElementById("wager2-button").style.backgroundColor="#b8cfb8";
-		document.getElementById("wager5-button").style.backgroundColor="#b8cfb8";
-		document.getElementById("draw-button").style.backgroundColor="black";
-		document.getElementById("hit-button").style.backgroundColor="b8cfb8";
-		document.getElementById("stand-button").style.backgroundColor="#b8cfb8";
-		document.getElementById("message").innerHTML = "";
+		$('money').innerHTML = totalMoney;
+		$("wager1-button").disabled=true;
+		$("wager2-button").disabled=true;
+		$("wager5-button").disabled=true;
+		$("wager1-button").style.backgroundColor="#b8cfb8";
+		$("wager2-button").style.backgroundColor="#b8cfb8";
+		$("wager5-button").style.backgroundColor="#b8cfb8";
+		$("draw-button").style.backgroundColor="black";
+		$("hit-button").style.backgroundColor="b8cfb8";
+		$("stand-button").style.backgroundColor="#b8cfb8";
+		$("message").innerHTML = "";
 		totalLostWon = totalMoney - initialMoney;
-		document.getElementById("wins-and-losses").innerHTML ="$" + totalLostWon;
+		$("wins-and-losses").innerHTML ="$" + totalLostWon;
 	}
 }
 
 
 
 function disableButtons(){
-	document.getElementById("stand-button").disabled=true;
-	document.getElementById("hit-button").disabled=true;
+	$("stand-button").disabled=true;
+	$("hit-button").disabled=true;
 }
 
 function disablePlayButtons(){
-	document.getElementById("stand-button").disabled=true;
-	document.getElementById("hit-button").disabled=true;
-	document.getElementById("draw-button").disabled-true;
-	document.getElementById("stand-button").style.backgroundColor = "#b8cfb8";
-	document.getElementById("hit-button").style.backgroundColor = "#b8cfb8";
-	document.getElementById("draw-button").style.backgroundColor = "#b8cfb8";
+	$("stand-button").disabled=true;
+	$("hit-button").disabled=true;
+	$("draw-button").disabled-true;
+	$("stand-button").style.backgroundColor = "#b8cfb8";
+	$("hit-button").style.backgroundColor = "#b8cfb8";
+	$("draw-button").style.backgroundColor = "#b8cfb8";
 
 
 
 }
 function enableButtons(){
-	document.getElementById('wager1-button').disabled=false;
-	document.getElementById('wager2-button').disabled=false;
-	document.getElementById('wager5-button').disabled=false;
-	document.getElementById("wager1-button").style.backgroundColor="red";
-	document.getElementById("wager2-button").style.backgroundColor="red";
-	document.getElementById("wager5-button").style.backgroundColor="red";
+	$('wager1-button').disabled=false;
+	$('wager2-button').disabled=false;
+	$('wager5-button').disabled=false;
+	$("wager1-button").style.backgroundColor="red";
+	$("wager2-button").style.backgroundColor="red";
+	$("wager5-button").style.backgroundColor="red";
 
-	document.getElementById('current-bet-amount').innerHTML = " $" + 0;
+	$('current-bet-amount').innerHTML = " $" + 0;
 }
 
 
@@ -406,15 +405,15 @@ function reset(){
 	totalGames++;
 	if (totalWins>0){
 		winningPercentage = Math.round((totalWins / (totalGames-1))*100);
-		document.getElementById('winning-percentage').innerHTML = winningPercentage;
+		$('winning-percentage').innerHTML = winningPercentage;
 
 	}else{
-		document.getElementById('winning-percentage').innerHTML = 0;
+		$('winning-percentage').innerHTML = 0;
 	}
-	document.getElementById('total-ties').innerHTML = numberOfTies;	
-	document.getElementById('win-count').innerHTML = totalWins;	
+	$('total-ties').innerHTML = numberOfTies;	
+	$('win-count').innerHTML = totalWins;	
 	var numberOfLosses = totalGames - numberOfTies - totalWins - 1;
-	document.getElementById('total-lost').innerHTML = numberOfLosses;
+	$('total-lost').innerHTML = numberOfLosses;
 
 	playerTotalCards = 2;
 	dealerTotalCards = 2;
@@ -428,9 +427,9 @@ function reset(){
 		cards[i].style.background = "";
 
 	}
-	document.getElementById('message').innerHTML = "";
-	document.getElementById("hit-button").disabled=false;
-	document.getElementById("stand-button").disabled=false;
+	$('message').innerHTML = "";
+	$("hit-button").disabled=false;
+	$("stand-button").disabled=false;
 
 
 }
