@@ -16,6 +16,10 @@ var currentWager = 0;
 var gainsAndLosses = 0;
 var totalLostWon = 0;
 
+function playGame(){
+	document.getElementById("start-game").style.display="none";
+}
+
 function shuffleDeck(){
 	//fill our deck, in order(for now)
 	//suit
@@ -66,11 +70,6 @@ function placeCard(card, who, slot){   //for visual effect of placing cards on t
 	}else if (cardValue===1){
 		newCardValue = "A";
 	}
-	// var newCardValue = newCardValue + suitValue;
-	// card = newCardValue;
-
-
-
 
 	document.getElementById(currId).className = "card"; //takes away empty class
 	document.getElementById(currId).innerHTML = "<br>" + newCardValue; 
@@ -96,6 +95,7 @@ function bust(who){
 		disablePlayButtons();
 		enableButtons();
 	}else{
+		//dealer lost!!  player won
 		document.getElementById('message').innerHTML = "The dealer busted. You win!. Bet again";
 		totalWins++;
 		document.getElementById('win-count').innerHTML = totalWins;
@@ -154,8 +154,6 @@ function deal(){
 	document.getElementById("hit-button").style.backgroundColor="black";
 	document.getElementById("stand-button").style.backgroundColor="black";
 
-
-
 	deck = shuffleDeck();
 	playerHand = [ deck[0], deck[2] ];
 	dealerHand = [ deck[1], deck[3] ];
@@ -163,7 +161,6 @@ function deal(){
 	placeCard(playerHand[0], 'player', 'one');
 	placeCard(dealerHand[0], 'dealer', 'one');
 	placeCard(playerHand[1], 'player', 'two');
-	// placeCard(dealerHand[1], 'dealer', 'two');
 
 	calculateTotal(playerHand, 'player');
 	document.getElementById('dealer-total').innerHTML = "";
@@ -171,7 +168,6 @@ function deal(){
 	var playerTotal = calculateTotal(playerHand, 'player');
 	if ((dealerTotal === 21) && (playerTotal != 21)){
 		placeCard(dealerHand[1], 'dealer', 'two');
-		// document.getElementById('message').innerHTML = "Dealer got BlackJack.  You lose.";
 		disablePlayButtons();
 		document.getElementById('message').innerHTML = "Dealer got BlackJack. You lose. Bet again";
 		document.getElementById("draw-button").style.backgroundColor="black";
@@ -193,19 +189,9 @@ function deal(){
 		document.getElementById('message').innerHTML = "You have 21.  Time to Stand";			// document.getElementById('message').innerHTML = "You have 21. Time to Stand.";
 	}
 	document.getElementById("wins-and-losses").innerHTML ="$" + totalLostWon;
-
-
 	
 }
 
-// function myFunction(){
-// 	document.getElementById('message').innerHTML = "You have 21.  Time to Stand";
-// }
-
-
-// function backToDefault(){
-// 	document.getElementById('hit-button').removeEventListener("onmouseover", myFunction, false);
-// }
 
 function hit(){
 	var slot;
