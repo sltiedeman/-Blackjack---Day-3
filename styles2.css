@@ -7,7 +7,7 @@
 	border-radius: 10px;
 }
 
-#start-game{
+#intro-page{
 	position: absolute;
 	height: 100vh;
 	width: 100%;
@@ -20,11 +20,11 @@
 	color: #f2f2f2;
 }
 
-#start-game img{
+#intro-page img{
 	text-align: center;
 	margin-top: 45px;
 }
-#start-game h1{
+#intro-page h1{
 	font-family: 'Varela Round', sans-serif;
 	text-align: center;
 	margin-top: 10px;
@@ -32,7 +32,7 @@
 	letter-spacing: 3px;
 }
 
-#start-game p{
+#intro-page p{
 	line-height: 125%;
 	width: 70%;
 	margin: auto;
@@ -43,7 +43,7 @@
 	font-weight: 300;
 }
 
-#start-game button{
+#intro-page button{
 	font-family: 'Varela Round', sans-serif;
 	text-transform: uppercase;
 	text-align: center;
@@ -57,7 +57,7 @@
 	border: 0px;
 }
 
-#start-game button:hover{
+#intro-page button:hover{
 	cursor: pointer;
 	background-color: #ffc04d;
 }
