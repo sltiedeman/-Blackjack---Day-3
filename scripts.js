@@ -16,8 +16,17 @@ var currentWager = 0;
 var gainsAndLosses = 0;
 var totalLostWon = 0;
 
+setTimeout(function(){
+	var windowHeight = window.innerHeight;
+	var contentHeight = $('#intro-page').height();
+	console.log(contentHeight);
+	var paddingAdjust = parseInt((windowHeight - contentHeight)/2)
+	$('#intro-page').css('padding-top', paddingAdjust + 'px');
+},10);
+
+
 function playGame(){
-	document.getElementById("start-game").style.display="none";
+	document.getElementById("intro-page-wrapper").style.display="none";
 }
 
 function shuffleDeck(){
